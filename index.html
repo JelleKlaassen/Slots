@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="js/slot-machine.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/slot-machine.min.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type="text/javascript">
+		
+		
+		const options = {
+        sounds: {
+          reelsBegin: './sounds/reelsBegin.mp3',
+          reelsEnd: './sounds/reelsEnd.mp3',
+        },
+        rngFunc: function() {
+                return Math.random()
+            }
+      	};
+		const reels = [
+  			{
+    		imageSrc: './img/reel1.png',
+    		symbols: [
+    		  { title: 'apple',position: 100,weight: 1 },{ title: 'bar',position: 300,weight: 1 },{ title: 'cherry',position: 500,weight: 1 },
+    		  { title: 'lemon',position: 700,weight: 1 },{ title: 'melon',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel2.png',
+    		symbols: [
+    		  { title: 'seven',position: 100,weight: 1 },{ title: 'melon',position: 300,weight: 1 },{ title: 'lemon',position: 500,weight: 1 },
+    		  { title: 'cherry',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'apple',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel3.png',
+    		symbols: [
+    		  { title: 'cherry',position: 100,weight: 1 },{ title: 'lemon',position: 300,weight: 1 },{ title: 'melon',position: 500,weight: 1 },
+    		  { title: 'seven',position: 700,weight: 1 },{ title: 'apple',position: 900,weight: 1 },{ title: 'bar',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel4.png',
+    		symbols: [
+    		  { title: 'cherry',position: 100,weight: 1 },{ title: 'bar',position: 300,weight: 1 },{ title: 'apple',position: 500,weight: 1 },
+    		  { title: 'seven',position: 700,weight: 1 },{ title: 'melon',position: 900,weight: 1 },{ title: 'lemon',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel5.png',
+    		symbols: [
+    		  { title: 'lemon',position: 100,weight: 1 },{ title: 'cherry',position: 300,weight: 1 },{ title: 'melon',position: 500,weight: 1 },
+    		  { title: 'apple',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 1 }]}
+    		];
+		window.onload = function() {
+			let coins,jackpot,coinDiv,betDiv,jackpotDiv,betAmount,winTitle;
+			coinDiv = document.getElementById('coins');
+			betDiv = document.getElementById('bet');
+			jackpotDiv = document.getElementById('jackpot');
+			betAmount = document.getElementById('betAmount');
+			winTitle = document.getElementById('winTitle');
+			coins = 10;
+			jackpot = 1000;
+			setVals();
+        const callback = function(payLine) {
+          //console.log(payLine[0].title + ' | ' + payLine[1].title + ' | ' + payLine[2].title + ' | ' + payLine[3].title + ' | ' + payLine[4].title);
+        	payLine = tempArray;
+        	console.log(payLine);
+        	if (payLine[0].title === payLine[1].title || payLine[1].title === payLine[2].title || payLine[2].title === payLine[3].title || payLine[3].title === payLine[4].title) {
+        		winTitle.innerHTML = "2-OF-A-KIND!";
+          		setTimeout(wipeTitle,3000);
+          		coins += betAmount.value*2;
+          		setVals();
+        	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title || payLine[1].title === payLine[2].title && payLine[1].title === payLine[3].title || payLine[2].title === payLine[3].title && payLine[2].title === payLine[4].title) {
+        		if (payLine[0].title == "seven" || payLine[1].title == "seven" || payLine[2].title == "seven") {
+          			winTitle.innerHTML = "LUCKY SEVEN!";
+          			setTimeout(wipeTitle,3000);
+          			coins += betAmount.value*7;
+          			setVals();
+          		} else {
+          			winTitle.innerHTML = "3-IN-A-ROW!";
+          			setTimeout(wipeTitle,3000);
+          			coins += betAmount.value*3;
+          			setVals();
+          		}
+        	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
+        		winTitle.innerHTML = "JACKPOT!!!";
+          		setTimeout(wipeTitle,5000);
+          		coins += jackpot;
+          		setVals();
+        	}
+
+          button.disabled = false;
+          // if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
+          //   (new Audio('sounds/winner.mp3')).play();
+          // }
+        };
+
+        var machine = document.getElementById('slot-machine');
+        var button = document.getElementById('play-button');
+
+        const slot = slotMachine(machine, reels, callback, options);
+
+        button.addEventListener('click', playGame);
+        function playGame() {
+        	if (coins >= betAmount.value) {
+        		button.disabled = true;
+        		slot.play();
+        		coins -= betAmount.value;
+        	} else if (coins <= 0) {
+        		winTitle.innerHTML = "You Lose!";
+        		setTimeout(location.reload(),3000);
+        	};
+        	setVals();
+      	}
+      	function setVals() {
+      		coinDiv.innerHTML = coins;
+			betDiv.innerHTML = betAmount.value;
+			jackpotDiv.innerHTML = jackpot;
+      	}
+      	function wipeTitle(){
+      		winTitle.innerHTML = "";
+      	}
+      };
+	</script>
+	<title></title>
+</head>
+<body>
+<h2>Slot Machine</h2>
+<div id="machine-case">
+	<h3>Jackpot: <span id="jackpot"><span></h3>
+	<h3>Coins: <span id="coins"></span> | Current Bet: <span id="bet"></span></h3>
+	<p id="winTitle">Test</p>
+	<div id="slot-machine" class="slot-machine"></div>
+	<select id="betAmount" onchange="document.getElementById('bet').innerHTML = this.value;">
+		<option selected value="1">1</option>
+		<option value="5">5</option>
+		<option value="10">10</option>
+		<option value="50">50</option>
+		<option value="100">100</option>
+	</select>
+	<button id="play-button">Spin!</button>
+</div>
+</body>
+</html>
