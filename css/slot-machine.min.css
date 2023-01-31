@@ -8,7 +8,7 @@
     position:absolute;
     transform:translateZ(0);
     width:inherit;
-    z-index:2
+    z-index:2;
 }
 .slot-machine .display .reel{
     background:0 0;
@@ -37,11 +37,14 @@
     --webkit-transform:translate3d(0, 0, 0)
 }
 .slot-machine .slots .reel{
-    display:inline-block;
+    display: table-cell;
+    /* margin-right: -114px; */
+    margin-left: -190px;
+    width: 96px;
 }
 .slot-machine .slots .reel .strip{
-    list-style:none;
-    margin-left:-40px;
+    list-style: none;
+    margin-left: 16px;
     transform-style:preserve-3d
 }
 .slot-machine .slots .reel .strip.start{
@@ -54,10 +57,11 @@
     animation:init 1s ease-out reverse
 }
 .slot-machine .slots .reel .strip li{
-    font-size:0;
+    margin-left: -45px;
+    font-size: 0;
     position:absolute;
     text-align:center;
-    -webkit-backface-visibility:hidden
+    -webkit-backface-visibility:hidden;
 }
 @-moz-keyframes init{
     from{

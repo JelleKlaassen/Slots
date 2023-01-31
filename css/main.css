@@ -1,23 +1,254 @@
-#slot-machine {
-  margin: 10% auto 0 auto;
+:root {
+  --red: #FF0000;
 }
-h2 {
+html {
+  height: 100%;
+  width: 99%;
+}
+body {
   text-align: center;
-  font-family: 'Lobster', cursive;
-  font-size: 50px;
+  height: 100%;
+  width: 100%;
 }
-h3,p {
-  color: silver;
-  font-family: verdana;
+#wrapper {
+  width: 75%;
+  height: 100%;
+  margin: 50px auto 0px auto;
+  background-image: url('../img/bg.jpg');
+}
+#slot-machine {
+  margin-left: -8px;
+  margin-top: -45px;
+}
+h3 {
+  margin: 0;
+  color: goldenrod;
+}
+h3,p,button {
+  font-family: 'Lobster', cursive;
 }
 #machine-case {
-  width: 60%;
+  width: 983px;
+  height: 383px;
   margin: 0 auto 0 auto;
-  background-color: #1a1a1a;
+  overflow: hidden;
 }
-
 #play-button {
   display: block;
   margin: 0 auto;
-  width: 100px;
+  width: 150px;
+  font-size: 55px;
+}
+#bttnPanel {
+  margin: 30px auto 10px auto;
+  width: 70%;
+  background-color: red;
+}
+.bet-button {
+  font-size: 45px;
+}
+#bttnPanel table {
+  margin: 0 auto 0 auto;
+}
+#bttnPanel button:hover {
+  cursor: pointer;
+}
+#winTitle {
+  font-size: 45px;
+  margin: -35px 0 15px 0;
+}
+.winTitle {
+  
+  color: goldenrod;
+}
+#segmentBox {
+  text-align: left;
+  margin: -50px auto 0 auto;
+  transform: scale(0.9);
+}
+#segmentBox tr {
+  height: 50px;
+}
+.textSlot {
+  font-size: 60px;
+  padding: 0 5px 0 35px;
+  color: goldenrod;
+}
+.textJackpot {
+  font-size: 90px;
+}
+.nmbrJackpot {
+}
+.nmbrSlot {
+}
+.nmbrSlot,.nmbrJackpot {
+  
+}
+#coinCounter,#jackpotCounter,#betCounter {
+  display: inline-flex;
+  padding: 10px 5px 5px 25px;
+  text-align: center;
+  border: solid silver;
+  border-style: outset;
+  border-radius: 2px;
+  background-color: black;
+}
+.slots {
+  overflow: hidden;
+}
+.clear {
+  clear: both;
+}
+
+.display-container.display-size-12 {
+  margin-bottom: 12px;
+}
+
+
+.display-container {
+  position: relative;
+  margin-right: 12px;
+  float: left;
+}
+
+.display-container div.segment-x,
+.display-container div.segment-y {
+  position: absolute;
+}
+
+.display-container span.segment-border {
+  display: block;
+  position: absolute;
+}
+
+.display-container.display-size-12 {
+  width: 61px;
+  height: 110px;
+}
+
+.display-container.display-size-12 .segment-x {
+  width: 36px;
+  left: 6.5px;
+  border-bottom: 6px solid var(--red);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+.display-container.display-size-12 .segment-x .segment-border {
+  top: 6px;
+  left: -6px;
+  right: -6px;
+  border-top: 6px solid var(--red);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+.display-container.display-size-12 .segment-y {
+  height: 36px;
+  width: 0;
+  border-right: 6px solid var(--red);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.display-container.display-size-12 .segment-y .segment-border {
+  position: relative;
+  left: 6px;
+  height: 36px;
+  margin-top: -6px;
+  border-left: 6px solid var(--red);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+.display-container.display-size-12 .segment-a {
+  top: 0;
+}
+
+.display-container.display-size-12 .segment-b {
+  top: 6.5px;
+  left: 49px;
+}
+
+.display-container.display-size-12 .segment-c {
+  top: 55.5px;
+  left: 49px;
+}
+
+.display-container.display-size-12 .segment-d {
+  top: 98px;
+}
+
+.display-container.display-size-12 .segment-e {
+  top: 55.5px;
+  left: 0px;
+}
+
+.display-container.display-size-12 .segment-f {
+  top: 6.5px;
+  left: 0px;
+}
+
+.display-container.display-size-12 .segment-g {
+  top: 49px;
+}
+
+.display-no-1 .segment-a,
+.display-no-1 .segment-d,
+.display-no-1 .segment-e,
+.display-no-1 .segment-f,
+.display-no-1 .segment-g {
+  /*display: none;*/
+  opacity: 0.1;
+  filter: alpha(opacity=10);
+}
+
+.display-no-2 .segment-c,
+.display-no-2 .segment-f {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-3 .segment-e,
+.display-no-3 .segment-f {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-4 .segment-a,
+.display-no-4 .segment-d,
+.display-no-4 .segment-e {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-5 .segment-b,
+.display-no-5 .segment-e {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-6 .segment-b {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-7 .segment-d,
+.display-no-7 .segment-e,
+.display-no-7 .segment-f,
+.display-no-7 .segment-g {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-8 {}
+
+.display-no-9 .segment-e {
+  /*display: none;*/
+  opacity: 0.1;
+}
+
+.display-no-0 .segment-g {
+  /*display: none;*/
+  opacity: 0.1;
 }

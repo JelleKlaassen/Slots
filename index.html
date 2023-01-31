@@ -14,9 +14,10 @@
 		
 		const options = {
         sounds: {
-          reelsBegin: './sounds/reelsBegin.mp3',
+          reelsBegin: './sounds/reelsBegin.wav',
           reelsEnd: './sounds/reelsEnd.mp3',
         },
+        animSpeed: 1350,
         rngFunc: function() {
                 return Math.random()
             }
@@ -49,43 +50,112 @@
     		  { title: 'apple',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 1 }]}
     		];
 		window.onload = function() {
-			let coins,jackpot,coinDiv,betDiv,jackpotDiv,betAmount,winTitle;
+			let coins,jackpot,bet,coinDiv,betDiv,jackpotDiv,betAmount,winTitle,totalWon,display1,display2,display3,display4,display5,display6,display7,display8,display9,display10,display11,display12,display13,display14,display15;
 			coinDiv = document.getElementById('coins');
 			betDiv = document.getElementById('bet');
 			jackpotDiv = document.getElementById('jackpot');
 			betAmount = document.getElementById('betAmount');
 			winTitle = document.getElementById('winTitle');
+			
 			coins = 10;
 			jackpot = 1000;
+			totalWon = 0;
+			bet = 1;
+
+			
+			
+
+			display1 = document.getElementById('display-1');
+			display2 = document.getElementById('display-2');
+			display3 = document.getElementById('display-3');
+			display4 = document.getElementById('display-4');
+			display5 = document.getElementById('display-5');
+			display6 = document.getElementById('display-6');
+			display7 = document.getElementById('display-7');
+			display8 = document.getElementById('display-8');
+			display9 = document.getElementById('display-9');
+			display10 = document.getElementById('display-10');
+			display11 = document.getElementById('display-11');
+			display12 = document.getElementById('display-12');
+			display13 = document.getElementById('display-13');
+			display14 = document.getElementById('display-14');
+			display15 = document.getElementById('display-15');
+
 			setVals();
         const callback = function(payLine) {
           //console.log(payLine[0].title + ' | ' + payLine[1].title + ' | ' + payLine[2].title + ' | ' + payLine[3].title + ' | ' + payLine[4].title);
         	payLine = tempArray;
         	console.log(payLine);
-        	if (payLine[0].title === payLine[1].title || payLine[1].title === payLine[2].title || payLine[2].title === payLine[3].title || payLine[3].title === payLine[4].title) {
-        		winTitle.innerHTML = "2-OF-A-KIND!";
-          		setTimeout(wipeTitle,3000);
-          		coins += betAmount.value*2;
-          		setVals();
-        	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title || payLine[1].title === payLine[2].title && payLine[1].title === payLine[3].title || payLine[2].title === payLine[3].title && payLine[2].title === payLine[4].title) {
-        		if (payLine[0].title == "seven" || payLine[1].title == "seven" || payLine[2].title == "seven") {
-          			winTitle.innerHTML = "LUCKY SEVEN!";
-          			setTimeout(wipeTitle,3000);
-          			coins += betAmount.value*7;
-          			setVals();
-          		} else {
-          			winTitle.innerHTML = "3-IN-A-ROW!";
-          			setTimeout(wipeTitle,3000);
-          			coins += betAmount.value*3;
-          			setVals();
-          		}
-        	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
-        		winTitle.innerHTML = "JACKPOT!!!";
+        	if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
+        			winTitle.classList.remove('winTitle');
+        			winTitle.classList.add('rainbow-text');
+        			winTitle.innerHTML = "JACKPOT!!!";
           		setTimeout(wipeTitle,5000);
           		coins += jackpot;
+          		(new Audio('sounds/winner.mp3')).play();
+          		setVals();
+        	} else if (payLine[0].title === payLine[1].title && payLine[2].title === payLine[3].title || payLine[1].title === payLine[2].title && payLine[3].title === payLine[4].title || payLine[0].title === payLine[1].title && payLine[3].title === payLine[4].title) {
+        				winTitle.classList.remove('winTitle');
+        				winTitle.classList.add('rainbow-text');
+        				winTitle.innerHTML = "TWO PAIRS!";
+          			setTimeout(wipeTitle,3000);
+          			coins += bet*4;
+          			(new Audio('sounds/coins.mp3')).play();
+          			setVals();
+        	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title || payLine[1].title === payLine[2].title && payLine[1].title === payLine[3].title || payLine[2].title === payLine[3].title && payLine[2].title === payLine[4].title) {
+        		if (payLine[0].title == "seven" || payLine[1].title == "seven" || payLine[2].title == "seven") {
+        				winTitle.classList.remove('winTitle');
+        				winTitle.classList.add('rainbow-text');
+          			winTitle.innerHTML = "LUCKY SEVEN!";
+          			setTimeout(wipeTitle,3000);
+          			coins += bet*7;
+          			(new Audio('sounds/coins.mp3')).play();
+          			setVals();
+          		} else {
+          			winTitle.classList.remove('winTitle');
+          			winTitle.classList.add('rainbow-text');
+          			winTitle.innerHTML = "3-IN-A-ROW!";
+          			setTimeout(wipeTitle,3000);
+          			coins += bet*3;
+          			(new Audio('sounds/coins.mp3')).play();
+          			setVals();
+          		}
+        	} else if (payLine[0].title === payLine[1].title || payLine[1].title === payLine[2].title || payLine[2].title === payLine[3].title || payLine[3].title === payLine[4].title) {
+        			winTitle.classList.remove('winTitle');
+        			winTitle.classList.add('rainbow-text');
+        			winTitle.innerHTML = "2-OF-A-KIND!";
+          		setTimeout(wipeTitle,3000);
+          		coins += bet*2;
+          		(new Audio('sounds/coins.mp3')).play();
           		setVals();
         	}
-
+        	if (winTitle.classList.contains('rainbow-text')) {
+        		(function () {
+  						var angle = 0;
+  						var p = document.querySelector('.rainbow-text');
+  						var text = p.textContent.split('');
+  						var len = text.length;
+  						var phaseJump = 360 / len;
+  						var spans;
+		
+		  						p.innerHTML = text.map(function (char) {
+		    						return '<span>' + char + '</span>';
+		  						}).join('');
+		
+		  						spans = p.children;
+		
+		  						(function wheee () {
+		    						for (var i = 0; i < len; i++) {
+		      						spans[i].style.color = 'hsl(' + (angle + Math.floor(i * phaseJump)) + ', 55%, 70%)';
+		    						}
+		    						angle++;
+		    						requestAnimationFrame(wheee);
+  						}());
+						}());
+        	}
+        	for (var i = 0; i < betButtons.length; i++) {
+        		betButtons[i].disabled = false;
+        	};
           button.disabled = false;
           // if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
           //   (new Audio('sounds/winner.mp3')).play();
@@ -94,48 +164,300 @@
 
         var machine = document.getElementById('slot-machine');
         var button = document.getElementById('play-button');
+        var betButtons = document.querySelectorAll('.bet-button');
 
         const slot = slotMachine(machine, reels, callback, options);
 
         button.addEventListener('click', playGame);
         function playGame() {
-        	if (coins >= betAmount.value) {
+        	if (coins >= bet) {
         		button.disabled = true;
+        		for (var i = 0; i < betButtons.length; i++) {
+        			betButtons[i].disabled = true;
+        		};
         		slot.play();
-        		coins -= betAmount.value;
+        		coins -= bet;
         	} else if (coins <= 0) {
         		winTitle.innerHTML = "You Lose!";
-        		setTimeout(location.reload(),3000);
+        		setTimeout(resetGame,3000);
         	};
         	setVals();
       	}
       	function setVals() {
-      		coinDiv.innerHTML = coins;
-			betDiv.innerHTML = betAmount.value;
-			jackpotDiv.innerHTML = jackpot;
-      	}
+      		//coinDiv.innerHTML = coins;
+					//betDiv.innerHTML = bet;
+					//jackpotDiv.innerHTML = jackpot;
+					setdisplays('coin',coins);
+					setdisplays('jackpot',jackpot);
+					setdisplays('bet',bet);
+					totalWon = coins - 10;
+					//console.clear();
+					//console.log(totalWon);
+      	};
+      
+      betButtons[0].addEventListener('click',function(){ setBet(1) });
+      betButtons[1].addEventListener('click',function(){ setBet(5) });
+      betButtons[2].addEventListener('click',function(){ setBet(10) });
+      betButtons[3].addEventListener('click',function(){ setBet(50) });
+      betButtons[4].addEventListener('click',function(){ setBet(100) });
+
+			function setBet(number) {
+				if (number <= coins) {
+					switch(number) {
+						case 1:
+							bet = 1;
+							setVals();
+						break;
+						case 5:
+							bet = 5;
+							setVals();
+						break;
+						case 10:
+							bet = 10;
+							setVals();
+						break;
+						case 50:
+							bet = 50;
+							setVals();
+						break;
+						case 100:
+							bet = 100;
+							setVals();
+						break;
+					}
+			}};
       	function wipeTitle(){
-      		winTitle.innerHTML = "";
+      		winTitle.classList.add('winTitle');
+      		winTitle.classList.remove('rainbow-text');
+      		winTitle.innerHTML = "Spin To Win!";
       	}
+
+      	function resetGame() {
+      		location.reload();
+      	}
+
+      	
+
+				function setdisplays(disp, number) {
+					var baseClass = 'display-container display-size-12 display-no-';
+					var editedNumber = ' ';
+					if (number < 10) { editedNumber = "0000"+number }
+					else if (number >= 10 && number < 100) { editedNumber = "000"+number }
+					else if (number >= 100 && number < 1000) { editedNumber = "00"+number }
+					else if (number >= 1000 && number < 10000) { editedNumber = "0"+number }
+					else { editedNumber = number.toString()};
+
+					switch(disp) {
+						case 'coin':
+							display1.className = baseClass + editedNumber[0];
+							display2.className = baseClass + editedNumber[1];
+							display3.className = baseClass + editedNumber[2];
+							display4.className = baseClass + editedNumber[3];
+							display5.className = baseClass + editedNumber[4];
+						break;
+						case 'jackpot':
+							display6.className = baseClass + editedNumber[0];
+							display7.className = baseClass + editedNumber[1];
+							display8.className = baseClass + editedNumber[2];
+							display9.className = baseClass + editedNumber[3];
+							display10.className = baseClass + editedNumber[4];
+						break;
+						case 'bet':
+							display11.className = baseClass + editedNumber[0];
+							display12.className = baseClass + editedNumber[1];
+							display13.className = baseClass + editedNumber[2];
+							display14.className = baseClass + editedNumber[3];
+							display15.className = baseClass + editedNumber[4];
+						break;
+					}
+				}
+				
       };
 	</script>
 	<title></title>
 </head>
 <body>
-<h2>Slot Machine</h2>
+<div id="wrapper">
+	<table id="segmentBox">
+		<tr>
+			<td></td>
+			<td colspan="2" class="textJackpot"><h3>Jackpot:</h3></td>
+			<td colspan="1" class="nmbrJackpot">
+				<div id="jackpotCounter">
+					<div id="display-6" class="display-container display-size-12 display-no-0">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-7" class="display-container display-size-12 display-no-1">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-8" class="display-container display-size-12 display-no-2">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-9" class="display-container display-size-12 display-no-3">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-10" class="display-container display-size-12 display-no-4">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="textSlot"><p>Coins:</p></td>
+			<td class="nmbrSlot">
+				<div id="coinCounter">
+					<div id="display-1" class="display-container display-size-12 display-no-0">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-2" class="display-container display-size-12 display-no-1">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-3" class="display-container display-size-12 display-no-2">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-4" class="display-container display-size-12 display-no-3">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-5" class="display-container display-size-12 display-no-4">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+				</div>
+			</td>
+			<td class="textSlot"><p>Current Bet:</p></td>
+			<td class="nmbrSlot">
+				<div id="betCounter">
+					<div id="display-11" class="display-container display-size-12 display-no-0">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-12" class="display-container display-size-12 display-no-1">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-13" class="display-container display-size-12 display-no-2">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-14" class="display-container display-size-12 display-no-3">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+					<div id="display-15" class="display-container display-size-12 display-no-4">
+						<div class="segment-x segment-a"><span class="segment-border"></span></div>
+						<div class="segment-y segment-b"><span class="segment-border"></span></div>
+						<div class="segment-y segment-c"><span class="segment-border"></span></div>
+						<div class="segment-x segment-d"><span class="segment-border"></span></div>
+						<div class="segment-y segment-e"><span class="segment-border"></span></div>
+						<div class="segment-y segment-f"><span class="segment-border"></span></div>
+						<div class="segment-x segment-g"><span class="segment-border"></span></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+
+
+<p id="winTitle" class="winTitle">Spin To Win!</p>
 <div id="machine-case">
-	<h3>Jackpot: <span id="jackpot"><span></h3>
-	<h3>Coins: <span id="coins"></span> | Current Bet: <span id="bet"></span></h3>
-	<p id="winTitle">Test</p>
 	<div id="slot-machine" class="slot-machine"></div>
-	<select id="betAmount" onchange="document.getElementById('bet').innerHTML = this.value;">
-		<option selected value="1">1</option>
-		<option value="5">5</option>
-		<option value="10">10</option>
-		<option value="50">50</option>
-		<option value="100">100</option>
-	</select>
-	<button id="play-button">Spin!</button>
+</div>
+<div id="bttnPanel">
+		<table>
+			<tr>
+				<td><button class="bet-button">Bet 1</button></td>
+				<td><button class="bet-button">Bet 5</button></td>
+				<td><button class="bet-button">Bet 10</button></td>
+				<td><button class="bet-button">Bet 50</button></td>
+				<td><button class="bet-button">Bet 100</button></td>
+				<td><button id="play-button">Spin!</button></td>
+			</tr>
+		</table>
+</div>
 </div>
 </body>
 </html>
