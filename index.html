@@ -84,9 +84,6 @@
   			}
   			return "";
 			}
-			function setCookie(cname, cvalue) {
-  			document.cookie = cname + "=" + cvalue + ";path=/";
-			}
 			
 
 			display1 = document.getElementById('display-1');
@@ -202,8 +199,8 @@
         		slot.play();
         		coins -= bet;
         	} else if (coins <= 0) {
-        		setCookie("coins",0);
-        		setCookie("totalWon",0);
+        		document.cookie = "coins=" + 0 + ";path=/";
+						document.cookie = "totalWon=" + 0 + ";path=/";
         		winTitle.innerHTML = "You Lose!";
         		setTimeout(resetGame,3000);
         	};
@@ -217,8 +214,8 @@
 					setdisplays('jackpot',jackpot);
 					setdisplays('bet',bet);
 					totalWon = coins - 10;
-					setCookie("coins",coins);
-					setCookie("totalWon",totalWon);
+					document.cookie = "coins=" + coins + ";path=/";
+					document.cookie = "totalWon=" + totalWon + ";path=/";
 					//console.clear();
 					//console.log(totalWon);
       	};
