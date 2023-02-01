@@ -58,11 +58,9 @@
 			winTitle = document.getElementById('winTitle');
 
 			if (getCookie("coins") != "" && getCookie("coins") != 0) {
-				console.log("yay");
 				coins = getCookie("coins");
 				totalWon = getCookie("totalWon");
 			} else {
-				console.log("nay");
 				coins = 10;
 				totalWon = 0;
 			}
