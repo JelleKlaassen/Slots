@@ -122,7 +122,7 @@
           			(new Audio('sounds/coins.mp3')).play();
           			setVals();
         	} else if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title || payLine[1].title === payLine[2].title && payLine[1].title === payLine[3].title || payLine[2].title === payLine[3].title && payLine[2].title === payLine[4].title) {
-        		if (payLine[0].title == "seven" || payLine[1].title == "seven" || payLine[2].title == "seven") {
+        		if (payLine[0].title == "seven" && payLine[1].title == "seven" && payLine[2].title == "seven" || payLine[1].title == "seven" && payLine[2].title == "seven" && payLine[3].title == "seven" || payLine[2].title == "seven" && payLine[3].title == "seven" && payLine[4].title == "seven") {
         				winTitle.classList.remove('winTitle');
         				winTitle.classList.add('rainbow-text');
           			winTitle.innerHTML = "LUCKY SEVEN!";
