@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript">
 		
-		
+		let cheatMode = true;
 		const options = {
         sounds: {
           reelsBegin: './sounds/reelsBegin.wav',
@@ -22,7 +22,36 @@
                 return Math.random()
             }
       	};
-		const reels = [
+    if (cheatMode == true) {
+    	const reels = [
+  			{
+    		imageSrc: './img/reel1.png',
+    		symbols: [
+    		  { title: 'apple',position: 100,weight: 1 },{ title: 'bar',position: 300,weight: 1 },{ title: 'cherry',position: 500,weight: 1 },
+    		  { title: 'lemon',position: 700,weight: 1 },{ title: 'melon',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 100 }]},
+    		{
+    		imageSrc: './img/reel2.png',
+    		symbols: [
+    		  { title: 'seven',position: 100,weight: 100 },{ title: 'melon',position: 300,weight: 1 },{ title: 'lemon',position: 500,weight: 1 },
+    		  { title: 'cherry',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'apple',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel3.png',
+    		symbols: [
+    		  { title: 'cherry',position: 100,weight: 1 },{ title: 'lemon',position: 300,weight: 1 },{ title: 'melon',position: 500,weight: 1 },
+    		  { title: 'seven',position: 700,weight: 100 },{ title: 'apple',position: 900,weight: 1 },{ title: 'bar',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel4.png',
+    		symbols: [
+    		  { title: 'cherry',position: 100,weight: 1 },{ title: 'bar',position: 300,weight: 1 },{ title: 'apple',position: 500,weight: 1 },
+    		  { title: 'seven',position: 700,weight: 100 },{ title: 'melon',position: 900,weight: 1 },{ title: 'lemon',position: 1100,weight: 1 }]},
+    		{
+    		imageSrc: './img/reel5.png',
+    		symbols: [
+    		  { title: 'lemon',position: 100,weight: 1 },{ title: 'cherry',position: 300,weight: 1 },{ title: 'melon',position: 500,weight: 1 },
+    		  { title: 'apple',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 100 }]}
+    		];
+    } else {
+    	const reels = [
   			{
     		imageSrc: './img/reel1.png',
     		symbols: [
@@ -49,6 +78,8 @@
     		  { title: 'lemon',position: 100,weight: 1 },{ title: 'cherry',position: 300,weight: 1 },{ title: 'melon',position: 500,weight: 1 },
     		  { title: 'apple',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 1 }]}
     		];
+    }
+		
 		window.onload = function() {
 			let coins,jackpot,bet,coinDiv,betDiv,jackpotDiv,betAmount,winTitle,totalWon,display1,display2,display3,display4,display5,display6,display7,display8,display9,display10,display11,display12,display13,display14,display15;
 			coinDiv = document.getElementById('coins');
