@@ -56,13 +56,37 @@
 			jackpotDiv = document.getElementById('jackpot');
 			betAmount = document.getElementById('betAmount');
 			winTitle = document.getElementById('winTitle');
-			
-			coins = 10;
-			jackpot = 1000;
-			totalWon = 0;
+
+			if (getCookie("coins") != "" && getCookie("coins") != 0) {
+				console.log("yay");
+				coins = getCookie("coins");
+				totalWon = getCookie("totalWon");
+			} else {
+				console.log("nay");
+				coins = 10;
+				totalWon = 0;
+			}
+			jackpot = 2500;
 			bet = 1;
 
-			
+			function getCookie(cname) {
+  			let name = cname + "=";
+  			let decodedCookie = decodeURIComponent(document.cookie);
+  			let ca = decodedCookie.split(';');
+  			for(let i = 0; i <ca.length; i++) {
+  			  let c = ca[i];
+  			  while (c.charAt(0) == ' ') {
+  			    c = c.substring(1);
+  			  }
+  			  if (c.indexOf(name) == 0) {
+  			    return c.substring(name.length, c.length);
+  			  }
+  			}
+  			return "";
+			}
+			function setCookie(cname, cvalue) {
+  			document.cookie = cname + "=" + cvalue + ";path=/";
+			}
 			
 
 			display1 = document.getElementById('display-1');
@@ -178,6 +202,8 @@
         		slot.play();
         		coins -= bet;
         	} else if (coins <= 0) {
+        		setCookie("coins",0);
+        		setCookie("totalWon",0);
         		winTitle.innerHTML = "You Lose!";
         		setTimeout(resetGame,3000);
         	};
@@ -191,6 +217,8 @@
 					setdisplays('jackpot',jackpot);
 					setdisplays('bet',bet);
 					totalWon = coins - 10;
+					setCookie("coins",coins);
+					setCookie("totalWon",totalWon);
 					//console.clear();
 					//console.log(totalWon);
       	};

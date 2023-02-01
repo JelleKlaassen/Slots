@@ -9,12 +9,17 @@ body {
   text-align: center;
   height: 100%;
   width: 100%;
+  background-color: #242424;
 }
 #wrapper {
   width: 75%;
   height: 100%;
   margin: 50px auto 0px auto;
   background-image: url('../img/bg.jpg');
+  border-left: solid #2e2e2e;
+  border-right: solid #2e2e2e;
+  border-left-style: outset;
+  border-right-style: outset;
 }
 #slot-machine {
   margin-left: -8px;
@@ -42,16 +47,34 @@ h3,p,button {
 #bttnPanel {
   margin: 30px auto 10px auto;
   width: 70%;
-  background-color: red;
 }
 .bet-button {
   font-size: 45px;
+  margin: 0 10px 0 10px;
 }
 #bttnPanel table {
   margin: 0 auto 0 auto;
 }
+#bttnPanel button {
+  border: 3px solid #f5d300;
+  border-radius: 2px;
+  color: #f5d300;
+  background-color: #292300;
+}
 #bttnPanel button:hover {
   cursor: pointer;
+  border-color: #ffe129;
+  color: #ffe129;
+  background-color: #5c4f00;
+  box-shadow: 0px 0px 5px 2px rgba(92,79,0,1);
+
+}
+#bttnPanel button:disabled {
+  filter: grayscale(100%);
+}
+#bttnPanel button:disabled:hover {
+  box-shadow: unset;
+  background-color: #292300;
 }
 #winTitle {
   font-size: 45px;
