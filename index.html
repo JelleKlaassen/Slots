@@ -145,7 +145,7 @@
         			winTitle.innerHTML = "JACKPOT!!!";
           		setTimeout(wipeTitle,5000);
           		coins += jackpot;
-          		(new Audio('sounds/winner.mp3')).play();
+          		(new Audio('sounds/jackpot.mp3')).play();
           		setVals();
         	} else if (payLine[0].title === payLine[1].title && payLine[2].title === payLine[3].title || payLine[1].title === payLine[2].title && payLine[3].title === payLine[4].title || payLine[0].title === payLine[1].title && payLine[3].title === payLine[4].title) {
         				winTitle.classList.remove('winTitle');
@@ -181,7 +181,7 @@
           		coins += bet*2;
           		(new Audio('sounds/coins.mp3')).play();
           		setVals();
-        	}
+        	} else { (new Audio('sounds/lost.mp3')).play(); }
         	if (winTitle.classList.contains('rainbow-text')) {
         		(function () {
   						var angle = 0;
@@ -283,7 +283,8 @@
 							bet = 100;
 							setVals();
 						break;
-					}
+					};
+					(new Audio('sounds/setBet.mp3')).play();
 			}};
       	function wipeTitle(){
       		winTitle.classList.add('winTitle');
