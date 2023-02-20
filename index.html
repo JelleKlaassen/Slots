@@ -10,8 +10,7 @@
 	<link rel="stylesheet" href="css/slot-machine.min.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript">
-		
-		
+
 		const options = {
         sounds: {
           reelsBegin: './sounds/reelsStart.mp3',
@@ -82,7 +81,7 @@
     		  { title: 'apple',position: 700,weight: 1 },{ title: 'bar',position: 900,weight: 1 },{ title: 'seven',position: 1100,weight: 1 }]}
     		];
     }
-		
+
 		window.onload = function() {
 			let coins,jackpot,bet,coinDiv,betDiv,jackpotDiv,betAmount,winTitle,totalWon,display1,display2,display3,display4,display5,display6,display7,display8,display9,display10,display11,display12,display13,display14,display15;
 			coinDiv = document.getElementById('coins');
@@ -116,7 +115,6 @@
   			}
   			return "";
 			}
-			
 
 			display1 = document.getElementById('display-1');
 			display2 = document.getElementById('display-2');
@@ -136,7 +134,7 @@
 
 			setVals();
         const callback = function(payLine) {
-          //console.log(payLine[0].title + ' | ' + payLine[1].title + ' | ' + payLine[2].title + ' | ' + payLine[3].title + ' | ' + payLine[4].title);
+
         	payLine = tempArray;
         	console.log(payLine);
         	if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
@@ -190,13 +188,13 @@
   						var len = text.length;
   						var phaseJump = 360 / len;
   						var spans;
-		
+
 		  						p.innerHTML = text.map(function (char) {
 		    						return '<span>' + char + '</span>';
 		  						}).join('');
-		
+
 		  						spans = p.children;
-		
+
 		  						(function wheee () {
 		    						for (var i = 0; i < len; i++) {
 		    							if (spans[i] != undefined) {
@@ -212,9 +210,7 @@
         		betButtons[i].disabled = false;
         	};
           button.disabled = false;
-          // if (payLine[0].title === payLine[1].title && payLine[0].title === payLine[2].title && payLine[0].title === payLine[3].title && payLine[0].title === payLine[4].title) {
-          //   (new Audio('sounds/winner.mp3')).play();
-          // }
+
         };
 
         var machine = document.getElementById('slot-machine');
@@ -241,19 +237,16 @@
         	setVals();
       	}
       	function setVals() {
-      		//coinDiv.innerHTML = coins;
-					//betDiv.innerHTML = bet;
-					//jackpotDiv.innerHTML = jackpot;
+
 					setdisplays('coin',coins);
 					setdisplays('jackpot',jackpot);
 					setdisplays('bet',bet);
 					totalWon = coins - 10;
 					document.cookie = "coins=" + coins + ";path=/";
 					document.cookie = "totalWon=" + totalWon + ";path=/";
-					//console.clear();
-					//console.log(totalWon);
+
       	};
-      
+
       betButtons[0].addEventListener('click',function(){ setBet(1) });
       betButtons[1].addEventListener('click',function(){ setBet(5) });
       betButtons[2].addEventListener('click',function(){ setBet(10) });
@@ -296,8 +289,6 @@
       		location.reload();
       	}
 
-      	
-
 				function setdisplays(disp, number) {
 					var baseClass = 'display-container display-size-12 display-no-';
 					var editedNumber = ' ';
@@ -331,7 +322,7 @@
 						break;
 					}
 				}
-				
+
       };
 	</script>
 	<title></title>
@@ -495,12 +486,6 @@
 			</td>
 		</tr>
 	</table>
-
-
-
-
-
-
 
 <p id="winTitle" class="winTitle">Spin To Win!</p>
 <div id="machine-case">
