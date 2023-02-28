@@ -23,7 +23,6 @@
       	};
       	let cheatMode = false;
       	let reels;
-      	console.log(cheatMode);
     if (cheatMode == true) {
     	reels = [
   			{
@@ -258,25 +257,21 @@
 					switch(number) {
 						case 1:
 							bet = 1;
-							setVals();
 						break;
 						case 5:
 							bet = 5;
-							setVals();
 						break;
 						case 10:
 							bet = 10;
-							setVals();
 						break;
 						case 50:
 							bet = 50;
-							setVals();
 						break;
 						case 100:
 							bet = 100;
-							setVals();
 						break;
 					};
+					setVals();
 					(new Audio('sounds/setBet.mp3')).play();
 			}};
       	function wipeTitle(){
