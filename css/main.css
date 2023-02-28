@@ -14,12 +14,14 @@ body {
 #wrapper {
   width: 75%;
   height: 100%;
-  margin: 50px auto 0px auto;
+  margin: -10px auto 0px auto;
   background-image: url('../img/bg.jpg');
   border-left: solid #2e2e2e;
   border-right: solid #2e2e2e;
   border-left-style: outset;
   border-right-style: outset;
+  text-align: center;
+  display: table;
 }
 #slot-machine {
   margin-left: -8px;
@@ -86,11 +88,13 @@ h3,p,button {
 }
 #segmentBox {
   text-align: left;
-  margin: -50px auto 0 auto;
+  margin: 0 auto 0 auto;
   transform: scale(0.9);
+  width: 100%;
 }
 #segmentBox tr {
   height: 50px;
+  width: 100%;
 }
 .textSlot {
   font-size: 60px;
